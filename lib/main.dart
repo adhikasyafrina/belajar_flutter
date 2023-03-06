@@ -49,19 +49,50 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 1;
-  String _text = "Ganjil";
+  String _text = "";
+  String _textGanjil = "";
+  String _textGenap = "";
+  String _textPrima = "";
 
   void _incrementCounter() {
     setState(() {
       _counter++;
       if(_counter > 10){
-        _counter = 1;
+        _counter = 0;
       }
 
       if(_counter % 2 == 0){
         _text = "Genap";
       }else{
         _text = "Ganjil";
+      }
+
+      _textGanjil = "Ganjil: ";
+      for(int i=0; i<=_counter; i++){
+        if(i%2 != 0){
+          _textGanjil += '$i, ';
+        }
+      }
+
+      _textGenap = "Genap: ";
+      for(int i=1; i<=_counter; i++){
+        if(i%2 == 0 && i%3 == 0){
+          _textGenap += '$i, ';
+        }
+      }
+
+      _textPrima = "Prima: ";
+      for(int i=2; i<=_counter; i++){
+        bool isPrime = true;
+        for(int j=2; j<=i/2; j++){
+          if(i%j == 0){
+            isPrime = false;
+            break;
+          }
+        }
+        if(isPrime){
+          _textPrima += '$i, ';
+        }
       }
     });
   }
@@ -101,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Hai Depuk!',
+              'Praktikum 2',
             ),
             Text(
               '$_counter',
@@ -111,12 +142,24 @@ class _MyHomePageState extends State<MyHomePage> {
               _text,
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text(
+              _textGanjil,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              _textGenap,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              _textPrima,
+              style: Theme.of(context).textTheme.headline4,
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Pencet aku kak ^-^',
+        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
